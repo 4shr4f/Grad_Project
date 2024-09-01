@@ -1,4 +1,4 @@
 # Graduation Project
-# Auther [Ashraf Awwad]
+## Auther Ashraf Awwad
 
-## This is my graduation project 
+### This is my graduation project 
