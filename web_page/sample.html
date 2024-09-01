@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <title>Bearing Faults Detection</title>
+  <style>
+    .spinner {
+      display: none;
+      margin: auto;
+      width: 50px;
+      height: 50px;
+      border: 5px solid lightgray;
+      border-radius: 50%;
+      border-top: 5px solid blue;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+<div class="page-title-area bg-1">
+  <div class="container">
+    <div class="page-title-content">
+      <h2>Bearing Faults Detection</h2>
+      <ul>
+        <li><a href="about.html"> Go Back </a></li>
+        <li class="active">Add Audio Sample</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<section class="book-area ptb-100">
+  <div class="container">
+    <div class="row">
+      <div class="book-action ptb-100">
+        <h2>Upload Your Audio Sample Here:</h2>
+        <form id="uploadForm">
+          <div class="form-group">
+            <input type="file" id="fileInput" class="form-control" />
+          </div>
+          <button type="submit" class="default-btn">Upload</button>
+        </form>
+        <div class="spinner" id="spinner"></div>
+        <div id="result">
+          <h2>Result:</h2>
+          <p id="resultText"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="assets/js/jquery.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#uploadForm").on("submit", function (e) {
+      e.preventDefault();
+      var formData = new FormData();
+      var file = $("#fileInput")[0].files[0];
+      formData.append("file", file);
+
+      // Show spinner and hide result text
+      $("#spinner").css("display", "block");
+      $("#resultText").text("");
+
+      $.ajax({
+        url: "https://b863-34-68-123-42.ngrok-free.app/upload", // replace the url with the one you got, YOU MUST KEEP /upload!!!!!
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+          $("#resultText").text("Predicted Class: " + data.predicted_class);
+          $("#spinner").css("display", "none");
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          let errorMessage = "Error: " + (jqXHR.responseJSON ? jqXHR.responseJSON.error : "Failed to fetch data");
+          $("#resultText").text(errorMessage);
+          $("#spinner").css("display", "none");
+        },
+      });
+    });
+  });
+</script>
+</body>
+</html>
