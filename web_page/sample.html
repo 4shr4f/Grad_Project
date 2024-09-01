@@ -31,7 +31,7 @@
       <h2>Bearing Faults Detection</h2>
       <ul>
         <li><a href="about.html"> Go Back </a></li>
-        <li class="active">Add Audio Sample</li>
+        <li class="active">Add Sample</li>
       </ul>
     </div>
   </div>
@@ -40,7 +40,7 @@
   <div class="container">
     <div class="row">
       <div class="book-action ptb-100">
-        <h2>Upload Your Audio Sample Here:</h2>
+        <h2>Upload Your Matlab Sample Here:</h2>
         <form id="uploadForm">
           <div class="form-group">
             <input type="file" id="fileInput" class="form-control" />
@@ -70,7 +70,7 @@
       $("#resultText").text("");
 
       $.ajax({
-        url: "https://b863-34-68-123-42.ngrok-free.app/upload", // replace the url with the one you got, YOU MUST KEEP /upload!!!!!
+        url: "https://f8e0-35-240-133-75.ngrok-free.app/upload", 
         type: "POST",
         data: formData,
         contentType: false,
